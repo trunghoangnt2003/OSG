@@ -1,0 +1,20 @@
+#!/bin/bash
+
+read -p "Enter a number : " num
+check=1
+if [ $num == 1 ] || [ $num == 0 ] ; then
+check=0
+fi
+for ((i=2;i<=num/2;i++)); do
+if [ $((num%i)) == 0 ]; then
+	check=0
+	break
+fi
+done
+
+
+if [ $check == 1 ]; then
+echo "$num is prime number"
+else
+echo "$num is not a prime number"
+fi
