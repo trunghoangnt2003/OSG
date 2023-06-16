@@ -1,0 +1,30 @@
+#!/bin/bash
+
+get_ip_location() {
+  ip=$1
+  api_url="http://ip-api.com/json/$ip"
+
+  response=$(wget -qO- "$api_url")
+
+  if [[ $response == *"fail"* ]]; then
+    echo "Failed to retrieve location for IP: $ip"
+  else
+    country=$(echo "$response" | jq -r '.country')
+    region=$(echo "$response" | jq -r '.regionName')
+    city=$(echo "$response" | jq -r '.city')
+    zip=$(echo "$response" | jq -r '.zip')
+    latitude=$(echo "$response" | jq -r '.lat')
+    longitude=$(echo "$response" | jq -r '.lon')
+
+    echo "IP: $ip"
+    echo "Country: $country"
+    echo "Region: $region"
+    echo "City: $city"
+    echo "ZIP: $zip"
+    echo "Latitude: $latitude"
+    echo "Longitude: $longitude"
+  fi
+}
+
+read -p "Enter an IP address: " ip_address
+get_ip_location $ip_address
