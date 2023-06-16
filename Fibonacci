@@ -1,1 +1,21 @@
+#!/bin/bash
 
+read -p "Enter a number : " num
+a=0
+b=1
+check=1
+while [ $b -le $num ];do
+ if [ $b == $num ]; then
+  echo "$num is a Fibonacci number"
+  check=0
+  break
+ fi
+ 
+ c=$((a+b))
+ a=$b
+ b=$c
+ 
+ done
+ if [ $check == 1 ]; then
+ echo "$num is not a Fibonacci number"
+ fi
